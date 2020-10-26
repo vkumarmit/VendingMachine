@@ -10,7 +10,7 @@ namespace VendingMachine.Repository
     public class InMemoryProductRepository : IRepository
     {
         // for now I am using flyweight pattern but flyweight can be replace with distributed cache.
-        private readonly ConcurrentDictionary<string, Product> _inMemeoryRepository = new ConcurrentDictionary<string, Product>();
+        private readonly ConcurrentDictionary<string, Product> _inMemoryRepository = new ConcurrentDictionary<string, Product>();
 
         public void AddProduct(Product product)
         {
@@ -38,18 +38,17 @@ namespace VendingMachine.Repository
             if (product.ActualCost <= 0)
                 throw new ArgumentException($"{nameof(product.ActualCost)} can not be zero or negative.");
 
-            _inMemeoryRepository.TryAdd(product.ProductCode, product);
+            _inMemoryRepository.TryAdd(product.ProductCode, product);
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            return _inMemeoryRepository.Values.ToImmutableList();
+            return _inMemoryRepository.Values.ToImmutableList();
         }
 
         public Product GetProductByProductCode(string productCode)
         {
-            Product productOut;
-            _inMemeoryRepository.TryGetValue(productCode, out productOut);
+            _inMemoryRepository.TryGetValue(productCode, out var productOut);
             return productOut;
         }
 

@@ -14,148 +14,112 @@ namespace VendingMachineUnitTests.Repository
     {
         private readonly Fixture _fixture = new Fixture();
 
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Product_Code_Is_Null_or_empty()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Product_Code_Is_Null_or_empty(string productCode)
         {
             var testProduct = _fixture.Create<Product>();
 
-            Action action = () =>
+            void Action()
             {
                 var cut = new InMemoryProductRepository();
-                testProduct.ProductCode = string.Empty;
+                testProduct.ProductCode = productCode;
 
                 cut.AddProduct(testProduct);
-            };
+            }
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentException>((Action)Action);
         }
 
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Name_Is_Null_or_empty()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Name_Is_Null_or_empty(string productName)
         {
             var testProduct = _fixture.Create<Product>();
 
-            Action action = () =>
+            void Action()
             {
                 var cut = new InMemoryProductRepository();
-                testProduct.Name = string.Empty;
+                testProduct.Name = productName;
 
                 cut.AddProduct(testProduct);
-            };
+            }
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentException>((Action)Action);
         }
 
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_description_Is_Null_or_empty()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_description_Is_Null_or_empty(string description)
         {
             var testProduct = _fixture.Create<Product>();
 
-            Action action = () =>
+            void Action()
             {
                 var cut = new InMemoryProductRepository();
-                testProduct.Description = string.Empty;
+                testProduct.Description = description;
 
                 cut.AddProduct(testProduct);
-            };
+            }
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentException>((Action)Action);
         }
 
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Quantity_Is_negative()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Quantity_Is_negative_or_zero(int quantity)
         {
             var testProduct = _fixture.Create<Product>();
 
-            Action action = () =>
+            void Action()
             {
                 var cut = new InMemoryProductRepository();
-                testProduct.Quantity = -1;
+                testProduct.Quantity = quantity;
 
                 cut.AddProduct(testProduct);
-            };
+            }
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentException>((Action)Action);
         }
 
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Quantity_Is_zero()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Price_Is_negative_or_zero(decimal price)
         {
             var testProduct = _fixture.Create<Product>();
 
-            Action action = () =>
+            void Action()
             {
                 var cut = new InMemoryProductRepository();
-                testProduct.Quantity = 0;
+                testProduct.Price = price;
 
                 cut.AddProduct(testProduct);
-            };
+            }
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentException>((Action)Action);
         }
 
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Price_Is_negative()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Actual_Cost_Is_negative_or_zero(decimal actualCost)
         {
             var testProduct = _fixture.Create<Product>();
 
-            Action action = () =>
+            void Action()
             {
                 var cut = new InMemoryProductRepository();
-                testProduct.Price = -1;
+                testProduct.ActualCost = actualCost;
 
                 cut.AddProduct(testProduct);
-            };
+            }
 
-            Assert.Throws<ArgumentException>(action);
-        }
-
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Price_Is_zero()
-        {
-            var testProduct = _fixture.Create<Product>();
-
-            Action action = () =>
-            {
-                var cut = new InMemoryProductRepository();
-                testProduct.Price = 0;
-
-                cut.AddProduct(testProduct);
-            };
-
-            Assert.Throws<ArgumentException>(action);
-        }
-
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Actual_Cost_Is_negative()
-        {
-            var testProduct = _fixture.Create<Product>();
-
-            Action action = () =>
-            {
-                var cut = new InMemoryProductRepository();
-                testProduct.ActualCost = -1;
-
-                cut.AddProduct(testProduct);
-            };
-
-            Assert.Throws<ArgumentException>(action);
-        }
-
-        [Fact]
-        public void InMemoryProductRepository_should_throw_the_Argument_Exception_When_Actual_Cost_Is_zero()
-        {
-            var testProduct = _fixture.Create<Product>();
-
-            Action action = () =>
-            {
-                var cut = new InMemoryProductRepository();
-                testProduct.ActualCost = 0;
-
-                cut.AddProduct(testProduct);
-            };
-
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentException>((Action)Action);
         }
 
         [Fact]
@@ -165,8 +129,9 @@ namespace VendingMachineUnitTests.Repository
             cut.Init();
 
             var actual = cut.GetProducts();
-            actual.Should().NotBeNull();
-            actual.Count().Should().BeGreaterThan(0);
+            var products = actual.ToList();
+            products.Should().NotBeNull();
+            products.Count().Should().BeGreaterThan(0);
         }
 
         [Fact]
@@ -200,7 +165,7 @@ namespace VendingMachineUnitTests.Repository
 
             cut.AddProduct(testCokeProduct);
             var actual = cut.GetProductByProductCode(testCokeProduct.ProductCode);
-           
+
             actual.Should().NotBeNull();
             actual.Should().Be(testCokeProduct);
         }

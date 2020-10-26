@@ -1,13 +1,12 @@
-C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.AssemblyInfoInputs.cache
-C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.AssemblyInfo.cs
-C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.csproj.CoreCompileInputs.cache
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\bin\Debug\netcoreapp3.1\VendingMachine.exe
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\bin\Debug\netcoreapp3.1\VendingMachine.deps.json
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\bin\Debug\netcoreapp3.1\VendingMachine.runtimeconfig.json
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\bin\Debug\netcoreapp3.1\VendingMachine.runtimeconfig.dev.json
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\bin\Debug\netcoreapp3.1\VendingMachine.dll
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\bin\Debug\netcoreapp3.1\VendingMachine.pdb
+C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.AssemblyInfoInputs.cache
+C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.AssemblyInfo.cs
+C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.csproj.CoreCompileInputs.cache
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.dll
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.pdb
 C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.genruntimeconfig.cache
-C:\Users\TG\source\repos\VendingMachine\VendingMachine\obj\Debug\netcoreapp3.1\VendingMachine.csprojAssemblyReference.cache

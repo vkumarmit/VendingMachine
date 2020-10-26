@@ -12,7 +12,7 @@ namespace VendingMachine.Service
 {
     public class VendingMachineService : IVendingMachineService
     {
-        //We can use the Autofac to resolve the dependcy
+        //We can use the Autofac to resolve the dependency
         private readonly IRepository _inMemoryRepository;
         private readonly ConcurrentDictionary<int, VendingMachineItem> _vendingMachineMap = new ConcurrentDictionary<int, VendingMachineItem>();
         public VendingMachineService()
@@ -33,16 +33,15 @@ namespace VendingMachine.Service
             if (price <= 0)
                 throw new PurchaseException($"{nameof(price)} can not be zero or negative.");
 
-            VendingMachineItem vendingMachineItemOut;
-            _vendingMachineMap.TryGetValue(orderNumber, out vendingMachineItemOut);
+            _vendingMachineMap.TryGetValue(orderNumber, out var vendingMachineItemOut);
 
-            if (vendingMachineItemOut.TotalItem < quantity)
+            if (vendingMachineItemOut != null && vendingMachineItemOut.TotalItem < quantity)
                 throw new PurchaseException($"There is not enough quantity available for the order number:{orderNumber}");
 
-            var purchaseQauntity = vendingMachineItemOut.Price * quantity;
+            var purchaseQuantity = vendingMachineItemOut?.Price * quantity;
 
-            if (purchaseQauntity != price)
-                throw new PurchaseException($"Invalid price, Please provide the exact change or price for the order number:{orderNumber}");
+            if (purchaseQuantity != price)
+                throw new PurchaseException($"Invalid price, Please provide the exact change or price for the order number:{orderNumber} and quantity {quantity}");
 
             vendingMachineItemOut.DecrementItem(quantity);
 
@@ -84,7 +83,7 @@ namespace VendingMachine.Service
                         break;
 
                     default:
-                        throw new InvalidOperationException($"Inavlid product code {product.ProductCode} vending machine does not support.");
+                        throw new InvalidOperationException($"Invalid product code {product.ProductCode} vending machine does not support.");
                 }
             }
         }
